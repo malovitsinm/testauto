@@ -24,9 +24,5 @@ public class Main {
             e.printStackTrace();
         }
         System.out.println(output);
-        System.out.println(LocalDate.parse("02-12-2017", DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString());
-        //System.out.println(crazyLogger.getEntryByIndex(0));
-        //System.out.println(crazyLogger.getEntriesByDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-mm-YYYY : HH-mm"))));
-
     }
 }

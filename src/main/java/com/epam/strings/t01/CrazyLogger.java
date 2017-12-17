@@ -6,20 +6,27 @@ import java.io.Writer;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * In order to solve the problem of boiler-plate code this class uses Project Lombok annotation processor.
+ * For more details about this tool please refer to project Lombok
+ * <a href='https://projectlombok.org/features/all">feature page</a>.
+ *
+ * */
 public class CrazyLogger implements AutoCloseable {
-    private StringBuilder logJournal;
     @Getter
     private int entryCount;
+
+    @Getter
+    final private DateTimeFormatter dateTimeFormatter;
+    @Getter
+    final private DateTimeFormatter shortDateTimeFormatter;
 
     final private Writer outputStream;
     final private String msgStartDelimiter;
     final private String msgEndDelimiter;
     final private String annotationMarker;
-    @Getter
-    final private DateTimeFormatter dateTimeFormatter;
-    @Getter
-    final private DateTimeFormatter shortDateTimeFormatter;
+
+    private StringBuilder logJournal;
 
     public CrazyLogger(Writer outputStream, String msgStartDelimiter, String msgEndDelimiter,
                        String annotationMarker) {
