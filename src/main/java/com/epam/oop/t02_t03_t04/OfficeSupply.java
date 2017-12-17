@@ -5,6 +5,12 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.Period;
+/**
+ * In order to solve the problem of boiler-plate code this class uses Project Lombok annotation processor.
+ * For more details about this tool please refer to project Lombok
+ * <a href='https://projectlombok.org/features/all">feature page</a>.
+ *
+ * */
 @ToString
 public abstract class OfficeSupply {
     @Getter
