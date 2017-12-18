@@ -25,6 +25,12 @@ public class NotePad {
         allNotes[index] = new Note(noteText);
     }
 
+    public Note getNode(int index){
+        if (index >= allNotes.length || index < 0)
+            throw new RuntimeException("Incorrect array index");
+        return allNotes[index];
+    }
+
     public void removeNote(int index) throws RuntimeException {
         if (index >= allNotes.length || index < 0)
             throw new RuntimeException("Incorrect array index");
@@ -35,8 +41,9 @@ public class NotePad {
         if (index >= allNotes.length || index < 0)
             throw new RuntimeException("Incorrect array index");
         if (allNotes[index] == null)
-            throw new RuntimeException("There is no note corresponding to selected index");
-        allNotes[index].setNoteText(noteText);
+            addNote(noteText, index);
+        else
+            allNotes[index].setNoteText(noteText);
     }
 
     public void displayAllNotes() {
