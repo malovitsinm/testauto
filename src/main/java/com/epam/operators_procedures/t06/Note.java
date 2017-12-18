@@ -1,9 +1,7 @@
 package com.epam.operators_procedures.t06;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+
 /**
  * In order to solve the problem of boiler-plate code this class uses Project Lombok annotation processor.
  * For more details about this tool please refer to project Lombok
@@ -14,6 +12,7 @@ import lombok.ToString;
 @Getter
 @AllArgsConstructor
 @ToString
+@EqualsAndHashCode
 public class Note {
     private String noteText;
 }
