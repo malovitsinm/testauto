@@ -6,7 +6,7 @@ import java.io.Writer;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-/**
+/** This class provides a simple logging tool based on StringBuilder class
  * In order to solve the problem of boiler-plate code this class uses Project Lombok annotation processor.
  * For more details about this tool please refer to project Lombok
  * <a href='https://projectlombok.org/features/all">feature page</a>.
@@ -53,7 +53,14 @@ public class CrazyLogger implements AutoCloseable {
                 "@");
     }
 
-
+    /** A method which is used to add entry to the log on a specific date
+     * @param message
+     *          A message to log
+     * @param dateTime
+     *          Logging date
+     * @param annotations
+     *          Annotations (tags) used in log message
+     * */
     public void addEntry(String message, LocalDateTime dateTime, String... annotations) throws RuntimeException {
         if (message.contains(msgEndDelimiter))
             throw new RuntimeException("Added message contains delimiter symbol");
@@ -67,12 +74,25 @@ public class CrazyLogger implements AutoCloseable {
         entryCount++;
     }
 
-
+    /** A method which is used to add entry to the log
+     * @param message
+     *          A message to log
+     * @param annotations
+     *          Annotations (tags) used in log message
+     * */
     public void addEntry(String message, String... annotations) throws RuntimeException {
         addEntry(message, LocalDateTime.now(), annotations);
     }
 
 
+    /** A method which is used to get entry from log by its' index
+     * @param index
+     *          Message index in logger
+     * @return entry
+     *          A string containing logged message
+     * @throws IndexOutOfBoundsException
+     *          Exception raised in case of wrong index input
+     * */
     public String getEntryByIndex(int index) throws IndexOutOfBoundsException {
         if ((index < 0) || (index >= entryCount))
             throw new IndexOutOfBoundsException(String.valueOf(index));
@@ -80,6 +100,12 @@ public class CrazyLogger implements AutoCloseable {
         return logEntries[index];
     }
 
+    /** A method which is used to get all entries from the log by some date
+     * @param date
+     *          Date of logged messages
+     * @return entries
+     *          A stringBuilder containing all logged message on specific date
+     * */
     public StringBuilder getEntriesByDate(LocalDate date) {
         StringBuilder resultStringBuilder = new StringBuilder();
         for (int i = 0; i < entryCount; i++) {
@@ -91,11 +117,24 @@ public class CrazyLogger implements AutoCloseable {
         return resultStringBuilder;
     }
 
+    /** A method which is used to get all entries from the log by some date in string format
+     * @param date
+     *          Date of logged messages in string format
+     * @return entries
+     *          A stringBuilder containing all logged message on specific date
+     * */
     public StringBuilder getEntriesByDate(String date) {
         LocalDate localDate = LocalDate.parse(date, shortDateTimeFormatter);
         return getEntriesByDate(localDate);
     }
 
+
+    /** A method which is used to get all entries from the log containing some specific annotation (tag)
+     * @param annotations
+     *          Array of annotations
+     * @return entries
+     *          A stringBuilder containing all logged message on specific date
+     * */
     public StringBuilder getEntriesByAnnotations(String... annotations) {
         StringBuilder resultStringBuilder = new StringBuilder();
         for (int i = 0; i < entryCount; i++) {
@@ -112,6 +151,14 @@ public class CrazyLogger implements AutoCloseable {
     }
 
 
+    /** A method which is used to get and entry from the log by its' index and write it to outputStrem
+     * @param index
+     *          Date of logged messages in string format
+     * @return entries
+     *          A stringBuilder containing all logged message on specific date
+     * @throws IOException
+     *         An exception raised in case of stream errors
+     * */
     public String outputEntryByIndex(int index) throws IOException {
         String result = getEntryByIndex(index) + msgEndDelimiter;
         outputStream.write(result);
@@ -129,6 +176,7 @@ public class CrazyLogger implements AutoCloseable {
         outputStream.write(result.toString());
         return result;
     }
+
 
     @Override
     public void close() throws IOException {
